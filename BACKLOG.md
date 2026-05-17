@@ -8,7 +8,7 @@ Tasks should be small enough for one focused agent session.
 
 ### T-001: Add a reusable PageHeader component
 
-Status: ready
+Status: done
 Size: small
 
 Goal:
