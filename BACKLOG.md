@@ -7,6 +7,7 @@ Tasks should be small enough for one focused agent session.
 ## Ready for Agent
 
 ### T-001: Add a reusable PageHeader component
+
 Status: ready
 Size: small
 
@@ -14,6 +15,7 @@ Goal:
 Create a reusable `PageHeader` component for simple page headings.
 
 Acceptance criteria:
+
 - Component lives at `src/components/layout/PageHeader.tsx`
 - Component accepts `eyebrow`, `title`, and `description` props
 - `App.tsx` uses the new component

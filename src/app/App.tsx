@@ -1,28 +1,17 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { AppShell } from "@/components/layout/AppShell";
 import { EmptyState } from "@/components/layout/EmptyState";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 export function App() {
   return (
     <AppShell>
-      <section className="space-y-4">
-        <Badge variant="secondary" className="w-fit">
-          Agent-ready React starter
-        </Badge>
-
-        <div className="space-y-3">
-          <h1 className="text-4xl font-semibold tracking-tight">
-            Calm React Starter
-          </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground">
-            A clean, domain-neutral starting point for small React applications
-            built with TypeScript, Vite, Tailwind, shadcn/ui, and supervised
-            agentic workflows.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Agent-ready React starter"
+        title="Calm React Starter"
+        description="A clean, domain-neutral starting point for small React applications built with TypeScript, Vite, Tailwind, shadcn/ui, and supervised agentic workflows."
+      />
 
       <Separator />
 
