@@ -6,24 +6,23 @@ Tasks should be small enough for one focused agent session.
 
 ## Ready for Agent
 
-No ready tasks yet.
-
-## Draft Tasks
-
-### T-001: Add repository usage notes
-
-Status: done
+### T-001: Add a reusable PageHeader component
+Status: ready
 Size: small
 
 Goal:
-Add a short section to `README.md` explaining how to create a new project from this template.
+Create a reusable `PageHeader` component for simple page headings.
 
 Acceptance criteria:
-
-- `README.md` includes a section called "Using this template"
-- The section explains copying or cloning the template into a new repo
-- The section reminds the user to update the project name and project brief
-- No other files are changed
+- Component lives at `src/components/layout/PageHeader.tsx`
+- Component accepts `eyebrow`, `title`, and `description` props
+- `App.tsx` uses the new component
+- Existing visual style remains calm and simple
+- `pnpm check` passes
 
 Notes:
-This is a practice task for the first Codex loop.
+This is the first practice task for Codex in this starter.
+
+## Draft Tasks
+
+No draft tasks yet.
