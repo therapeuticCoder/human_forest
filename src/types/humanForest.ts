@@ -17,6 +17,7 @@ export type FieldConnection = {
 export type GuildPlane = {
   id: string;
   label: string;
+  labelPosition: "top" | "right" | "bottom";
   x: number;
   y: number;
   width: number;

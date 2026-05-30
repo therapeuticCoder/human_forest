@@ -8,19 +8,18 @@ type TimelineCardProps = {
 };
 
 const cardClasses: Record<TimelinePost["layer"], string> = {
-  pod: "border-lime-200/24 bg-lime-200/[0.075] shadow-[0_0_36px_rgba(190,242,100,0.08)]",
-  tribe: "border-sky-200/18 bg-sky-200/[0.055]",
+  pod: "border-amber-200/28 bg-amber-200/[0.085] shadow-[0_0_38px_rgba(251,191,36,0.12)]",
+  tribe: "border-sky-200/18 bg-sky-200/[0.052]",
   guild:
-    "border-violet-200/20 bg-violet-200/[0.06] shadow-[0_0_32px_rgba(167,139,250,0.07)]",
-  signal:
-    "border-amber-200/25 bg-amber-200/[0.07] shadow-[0_0_36px_rgba(251,191,36,0.08)]",
+    "border-violet-200/24 bg-violet-200/[0.065] shadow-[0_0_32px_rgba(167,139,250,0.08)]",
+  signal: "border-teal-200/14 bg-teal-200/[0.035] text-slate-400 opacity-85",
 };
 
 const badgeClasses: Record<TimelinePost["layer"], string> = {
-  pod: "border-lime-200/25 bg-lime-200/10 text-lime-100",
+  pod: "border-amber-200/30 bg-amber-200/12 text-amber-100",
   tribe: "border-sky-200/25 bg-sky-200/10 text-sky-100",
   guild: "border-violet-200/25 bg-violet-200/10 text-violet-100",
-  signal: "border-amber-200/25 bg-amber-200/10 text-amber-100",
+  signal: "border-teal-200/18 bg-teal-200/6 text-teal-100/70",
 };
 
 export function TimelineCard({ post, size = "full" }: TimelineCardProps) {
@@ -52,6 +51,8 @@ export function TimelineCard({ post, size = "full" }: TimelineCardProps) {
         <h2
           className={cn(
             "mt-1 font-semibold text-slate-50",
+            post.layer === "guild" && "uppercase tracking-[0.12em]",
+            post.layer === "signal" && "text-slate-300/80",
             size === "mini" ? "text-xs leading-4" : "text-sm",
           )}
         >

@@ -18,14 +18,12 @@ export function RelationshipField() {
       <div className="human-forest-stars absolute inset-0 opacity-65" />
 
       <div className="relative z-30">
-        <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-lg border border-emerald-200/25 bg-emerald-200/10 text-emerald-100 shadow-[0_0_34px_rgba(16,185,129,0.25)]">
-            <Sprout aria-hidden="true" className="h-5 w-5" />
-          </div>
+        <div className="flex flex-wrap items-center gap-3">
           <p className="text-sm font-semibold text-white">Human Forest</p>
-        </div>
-        <div className="mt-5 w-full max-w-xl rounded-lg border border-white/10 bg-slate-950/45 p-5 shadow-[0_0_34px_rgba(94,234,212,0.08)] backdrop-blur-md">
-          <h1 className="text-3xl font-semibold text-white sm:text-5xl">
+          <div className="grid h-9 w-9 place-items-center rounded-lg border border-emerald-200/25 bg-emerald-200/10 text-emerald-100 shadow-[0_0_34px_rgba(16,185,129,0.25)]">
+            <Sprout aria-hidden="true" className="h-4 w-4" />
+          </div>
+          <h1 className="text-sm font-semibold text-white">
             Not everything matters the same.
           </h1>
         </div>
