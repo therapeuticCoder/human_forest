@@ -1,14 +1,18 @@
 import type { CSSProperties } from "react";
 
 import { cn } from "@/lib/utils";
-import type { FieldNode as FieldNodeType } from "@/types/humanForest";
+import type { HumanForestActor, HumanForestLayer } from "@/types/humanForest";
 
-type FieldNodeProps = {
-  node: FieldNodeType;
+export type FieldMapActor = HumanForestActor & {
+  layer: Exclude<HumanForestLayer, "guild">;
 };
 
-const layerClasses: Record<FieldNodeType["layer"], string> = {
-  you: "h-24 w-24 border-emerald-200/80 bg-emerald-100/18 text-emerald-50 shadow-[0_0_70px_rgba(94,234,212,0.58)]",
+type FieldNodeProps = {
+  node: FieldMapActor;
+};
+
+const layerClasses: Record<Exclude<HumanForestLayer, "guild">, string> = {
+  self: "h-24 w-24 border-emerald-200/80 bg-emerald-100/18 text-emerald-50 shadow-[0_0_70px_rgba(94,234,212,0.58)]",
   pod: "h-18 w-18 border-amber-100/85 bg-amber-200/22 text-amber-50 shadow-[0_0_64px_rgba(251,191,36,0.54)]",
   tribe:
     "h-8 w-8 border-sky-200/30 bg-sky-300/8 text-sky-100/80 opacity-80 shadow-[0_0_18px_rgba(125,211,252,0.14)]",
@@ -16,14 +20,15 @@ const layerClasses: Record<FieldNodeType["layer"], string> = {
     "h-7 w-7 border-teal-100/45 bg-teal-200/8 text-teal-50/70 shadow-[0_0_46px_rgba(45,212,191,0.32)]",
 };
 
-function getSignalLabelPosition(node: FieldNodeType) {
-  const verticalPosition = node.y > 80 ? "bottom-full mb-2" : "top-full mt-2";
+function getSignalLabelPosition(node: FieldMapActor) {
+  const verticalPosition =
+    node.position.y > 80 ? "bottom-full mb-2" : "top-full mt-2";
 
-  if (node.x < 18) {
+  if (node.position.x < 18) {
     return `${verticalPosition} left-0`;
   }
 
-  if (node.x > 82) {
+  if (node.position.x > 82) {
     return `${verticalPosition} right-0`;
   }
 
@@ -32,13 +37,13 @@ function getSignalLabelPosition(node: FieldNodeType) {
 
 export function FieldNode({ node }: FieldNodeProps) {
   const style = {
-    left: `${node.x}%`,
-    top: `${node.y}%`,
+    left: `${node.position.x}%`,
+    top: `${node.position.y}%`,
   } satisfies CSSProperties;
 
   return (
     <div
-      aria-label={`${node.label}, ${node.layer} node`}
+      aria-label={`${node.displayName}, ${node.layer} node`}
       className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
       style={style}
     >
@@ -51,13 +56,13 @@ export function FieldNode({ node }: FieldNodeProps) {
         <span
           className={cn(
             "max-w-[4.75rem] text-center font-medium leading-none",
-            node.layer === "you" && "text-base",
+            node.layer === "self" && "text-base",
             node.layer === "pod" && "text-xs",
             node.layer === "tribe" && "text-[0.56rem]",
             node.layer === "signal" && "sr-only",
           )}
         >
-          {node.label}
+          {node.displayName}
         </span>
       </div>
       {node.layer === "pod" ? (
@@ -76,7 +81,7 @@ export function FieldNode({ node }: FieldNodeProps) {
               getSignalLabelPosition(node),
             )}
           >
-            {node.label}
+            {node.displayName}
           </span>
         </>
       ) : null}

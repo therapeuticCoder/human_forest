@@ -1,12 +1,23 @@
 import { Sprout } from "lucide-react";
 
-import { fieldConnections, fieldNodes, guildPlanes } from "@/data/humanForest";
+import {
+  humanForestActors,
+  humanForestConnections,
+  humanForestGuilds,
+} from "@/data/humanForestMockData";
 
-import { FieldNode } from "./FieldNode";
+import { FieldNode, type FieldMapActor } from "./FieldNode";
 import { FieldControlBar } from "./FieldControlBar";
 import { GuildPlane } from "./GuildPlane";
 
-const nodesById = new Map(fieldNodes.map((node) => [node.id, node]));
+function isFieldMapActor(
+  actor: (typeof humanForestActors)[number],
+): actor is FieldMapActor {
+  return actor.layer !== "guild";
+}
+
+const fieldMapActors = humanForestActors.filter(isFieldMapActor);
+const actorsById = new Map(fieldMapActors.map((actor) => [actor.id, actor]));
 
 const ambientFilaments = [
   "M 6 18 C 18 23, 24 31, 37 35 S 57 34, 68 25 S 85 17, 96 26",
@@ -80,51 +91,52 @@ export function RelationshipField() {
             strokeWidth="0.13"
           />
         </g>
-        {fieldConnections.map((connection) => {
-          const from = nodesById.get(connection.from);
-          const to = nodesById.get(connection.to);
+        {humanForestConnections.map((connection) => {
+          const from = actorsById.get(connection.fromActorId);
+          const to = actorsById.get(connection.toActorId);
 
           if (!from || !to) {
             return null;
           }
 
+          const isPrimaryConnection =
+            connection.connectionType === "close" ||
+            connection.strength >= 0.75;
           const isPodConnection =
             from.layer === "pod" ||
             to.layer === "pod" ||
-            from.layer === "you" ||
-            to.layer === "you";
+            from.layer === "self" ||
+            to.layer === "self";
 
           return (
             <line
-              key={`${connection.from}-${connection.to}`}
+              key={connection.id}
               filter="url(#filament-glow)"
-              opacity={connection.strength === "primary" ? 0.72 : 0.23}
+              opacity={isPrimaryConnection ? 0.72 : 0.23}
               stroke={
-                isPodConnection && connection.strength === "primary"
+                isPodConnection && isPrimaryConnection
                   ? "rgb(253 230 138)"
-                  : connection.strength === "primary"
+                  : isPrimaryConnection
                     ? "rgb(167 243 208)"
                     : "rgb(125 211 252)"
               }
-              strokeDasharray={
-                connection.strength === "primary" ? "0" : "1 2.8"
-              }
+              strokeDasharray={isPrimaryConnection ? "0" : "1 2.8"}
               strokeLinecap="round"
-              strokeWidth={connection.strength === "primary" ? 0.38 : 0.18}
-              x1={from.x}
-              x2={to.x}
-              y1={from.y}
-              y2={to.y}
+              strokeWidth={isPrimaryConnection ? 0.38 : 0.18}
+              x1={from.position.x}
+              x2={to.position.x}
+              y1={from.position.y}
+              y2={to.position.y}
             />
           );
         })}
       </svg>
 
-      {guildPlanes.map((plane) => (
-        <GuildPlane key={plane.id} plane={plane} />
+      {humanForestGuilds.map((guild) => (
+        <GuildPlane key={guild.id} guild={guild} />
       ))}
 
-      {fieldNodes.map((node) => (
+      {fieldMapActors.map((node) => (
         <FieldNode key={node.id} node={node} />
       ))}
 

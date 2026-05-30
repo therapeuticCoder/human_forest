@@ -1,21 +1,56 @@
-import { Map } from "lucide-react";
+import { Map as MapIcon } from "lucide-react";
 
-import { timelinePosts } from "@/data/humanForest";
+import {
+  activityActors,
+  humanForestActivities,
+  mockNowIso,
+} from "@/data/humanForestMockData";
+import type { HumanForestActivity } from "@/types/humanForest";
 
 import { TimelineCard } from "./TimelineCard";
 
+const actorsById = new Map(activityActors.map((actor) => [actor.id, actor]));
+
+function getActivityLayer(activity: HumanForestActivity) {
+  return actorsById.get(activity.actorId)?.layer;
+}
+
+function formatActivityTime(publishedAt: string) {
+  const now = new Date(mockNowIso).getTime();
+  const published = new Date(publishedAt).getTime();
+  const minutesAgo = Math.max(0, Math.round((now - published) / 60000));
+
+  if (minutesAgo < 1) {
+    return "Now";
+  }
+
+  if (minutesAgo < 60) {
+    return `${minutesAgo}m`;
+  }
+
+  if (minutesAgo < 24 * 60) {
+    return `${Math.round(minutesAgo / 60)}h`;
+  }
+
+  if (minutesAgo < 48 * 60) {
+    return "Yesterday";
+  }
+
+  return `${Math.round(minutesAgo / (24 * 60))}d`;
+}
+
 export function TimelinePanel() {
-  const podPosts = timelinePosts
-    .filter((post) => post.layer === "pod")
+  const podActivities = humanForestActivities
+    .filter((activity) => getActivityLayer(activity) === "pod")
     .slice(0, 2);
-  const tribePosts = timelinePosts
-    .filter((post) => post.layer === "tribe")
+  const tribeActivities = humanForestActivities
+    .filter((activity) => getActivityLayer(activity) === "tribe")
     .slice(0, 2);
-  const guildPosts = timelinePosts
-    .filter((post) => post.layer === "guild")
+  const guildActivities = humanForestActivities
+    .filter((activity) => getActivityLayer(activity) === "guild")
     .slice(0, 1);
-  const signalPosts = timelinePosts
-    .filter((post) => post.layer === "signal")
+  const signalActivities = humanForestActivities
+    .filter((activity) => getActivityLayer(activity) === "signal")
     .slice(0, 3);
 
   return (
@@ -33,19 +68,36 @@ export function TimelinePanel() {
       </div>
 
       <div className="mt-5 grid gap-3 overflow-y-auto pb-4 pr-1 lg:min-h-0 lg:flex-1">
-        {podPosts.map((post) => (
-          <TimelineCard key={post.id} post={post} />
+        {podActivities.map((activity) => (
+          <TimelineCard
+            key={activity.id}
+            activity={activity}
+            actor={actorsById.get(activity.actorId)!}
+            time={formatActivityTime(activity.publishedAt)}
+          />
         ))}
 
         <div className="grid gap-2">
-          {[...tribePosts, ...guildPosts].map((post) => (
-            <TimelineCard key={post.id} post={post} size="compact" />
+          {[...tribeActivities, ...guildActivities].map((activity) => (
+            <TimelineCard
+              key={activity.id}
+              activity={activity}
+              actor={actorsById.get(activity.actorId)!}
+              size="compact"
+              time={formatActivityTime(activity.publishedAt)}
+            />
           ))}
         </div>
 
         <div className="grid grid-cols-3 gap-2">
-          {signalPosts.map((post) => (
-            <TimelineCard key={post.id} post={post} size="mini" />
+          {signalActivities.map((activity) => (
+            <TimelineCard
+              key={activity.id}
+              activity={activity}
+              actor={actorsById.get(activity.actorId)!}
+              size="mini"
+              time={formatActivityTime(activity.publishedAt)}
+            />
           ))}
         </div>
       </div>
@@ -55,7 +107,7 @@ export function TimelinePanel() {
           className="inline-flex items-center gap-2 rounded-lg border border-emerald-200/25 bg-emerald-200/10 px-3 py-2 text-sm font-medium text-emerald-100 shadow-[0_0_30px_rgba(52,211,153,0.12)] transition hover:bg-white/12"
           type="button"
         >
-          <Map aria-hidden="true" className="h-4 w-4" />
+          <MapIcon aria-hidden="true" className="h-4 w-4" />
           Field Map
         </button>
       </div>
