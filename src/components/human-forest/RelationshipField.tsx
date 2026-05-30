@@ -8,6 +8,15 @@ import { GuildPlane } from "./GuildPlane";
 
 const nodesById = new Map(fieldNodes.map((node) => [node.id, node]));
 
+const ambientFilaments = [
+  "M 6 18 C 18 23, 24 31, 37 35 S 57 34, 68 25 S 85 17, 96 26",
+  "M 4 48 C 15 42, 25 45, 34 53 S 49 71, 63 66 S 80 54, 96 60",
+  "M 12 78 C 23 70, 32 72, 43 80 S 61 92, 74 82 S 85 69, 95 76",
+  "M 22 10 C 29 24, 28 37, 39 46 S 59 52, 68 64 S 78 77, 88 90",
+  "M 10 66 C 20 62, 26 55, 35 57 S 49 65, 57 58 S 68 42, 80 40",
+  "M 33 18 C 39 27, 42 38, 51 42 S 66 42, 75 33 S 84 24, 93 31",
+];
+
 export function RelationshipField() {
   return (
     <section
@@ -43,7 +52,34 @@ export function RelationshipField() {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <filter id="ambient-filament-glow">
+            <feGaussianBlur stdDeviation="0.32" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
+        <g filter="url(#ambient-filament-glow)" opacity="0.42">
+          {ambientFilaments.map((path) => (
+            <path
+              key={path}
+              d={path}
+              fill="none"
+              stroke="rgb(153 246 228)"
+              strokeDasharray="0.45 2.2"
+              strokeLinecap="round"
+              strokeWidth="0.11"
+            />
+          ))}
+          <path
+            d="M 28 64 C 37 55, 44 50, 50 50 S 61 45, 72 36"
+            fill="none"
+            stroke="rgb(253 230 138)"
+            strokeLinecap="round"
+            strokeWidth="0.13"
+          />
+        </g>
         {fieldConnections.map((connection) => {
           const from = nodesById.get(connection.from);
           const to = nodesById.get(connection.to);
@@ -52,21 +88,29 @@ export function RelationshipField() {
             return null;
           }
 
+          const isPodConnection =
+            from.layer === "pod" ||
+            to.layer === "pod" ||
+            from.layer === "you" ||
+            to.layer === "you";
+
           return (
             <line
               key={`${connection.from}-${connection.to}`}
               filter="url(#filament-glow)"
-              opacity={connection.strength === "primary" ? 0.58 : 0.23}
+              opacity={connection.strength === "primary" ? 0.72 : 0.23}
               stroke={
-                connection.strength === "primary"
-                  ? "rgb(167 243 208)"
-                  : "rgb(125 211 252)"
+                isPodConnection && connection.strength === "primary"
+                  ? "rgb(253 230 138)"
+                  : connection.strength === "primary"
+                    ? "rgb(167 243 208)"
+                    : "rgb(125 211 252)"
               }
               strokeDasharray={
                 connection.strength === "primary" ? "0" : "1 2.8"
               }
               strokeLinecap="round"
-              strokeWidth={connection.strength === "primary" ? 0.32 : 0.18}
+              strokeWidth={connection.strength === "primary" ? 0.38 : 0.18}
               x1={from.x}
               x2={to.x}
               y1={from.y}

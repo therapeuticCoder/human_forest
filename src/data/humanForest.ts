@@ -133,8 +133,8 @@ export const timelinePosts: TimelinePost[] = [
     layer: "tribe",
     source: "Jordan from work",
     time: "12m",
-    title: "Coworker post",
-    body: "finally shipped the thing we kept circling. grateful for everyone who kept the thread kind.",
+    title: "LAN party this weekend if you're interested",
+    body: "Hey, dude. I'm having a LAN party next weekend if you're interested.",
   },
   {
     id: "g1",
@@ -173,8 +173,8 @@ export const timelinePosts: TimelinePost[] = [
     layer: "tribe",
     source: "Aunt Rae",
     time: "2h",
-    title: "Family post from away",
-    body: "snow finally melted in Duluth. found the old porch photo and thought of you kids.",
+    title: "Haven't seen you since your mother's birthday party",
+    body: "I have not seen you since your mother's birthday. How have you been?",
   },
   {
     id: "g2",

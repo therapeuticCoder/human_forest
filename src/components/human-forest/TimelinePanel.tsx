@@ -1,6 +1,7 @@
+import { Map } from "lucide-react";
+
 import { timelinePosts } from "@/data/humanForest";
 
-import { FieldControlBar } from "./FieldControlBar";
 import { TimelineCard } from "./TimelineCard";
 
 export function TimelinePanel() {
@@ -31,7 +32,7 @@ export function TimelinePanel() {
         </p>
       </div>
 
-      <div className="mt-5 grid gap-3 overflow-y-auto pb-28 pr-1 lg:min-h-0 lg:flex-1">
+      <div className="mt-5 grid gap-3 overflow-y-auto pb-4 pr-1 lg:min-h-0 lg:flex-1">
         {podPosts.map((post) => (
           <TimelineCard key={post.id} post={post} />
         ))}
@@ -49,7 +50,15 @@ export function TimelinePanel() {
         </div>
       </div>
 
-      <FieldControlBar viewControl="map" />
+      <div className="mt-4 flex justify-end border-t border-white/10 pt-3">
+        <button
+          className="inline-flex items-center gap-2 rounded-lg border border-emerald-200/25 bg-emerald-200/10 px-3 py-2 text-sm font-medium text-emerald-100 shadow-[0_0_30px_rgba(52,211,153,0.12)] transition hover:bg-white/12"
+          type="button"
+        >
+          <Map aria-hidden="true" className="h-4 w-4" />
+          Field Map
+        </button>
+      </div>
     </aside>
   );
 }
