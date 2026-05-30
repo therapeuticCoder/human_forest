@@ -128,3 +128,18 @@
     @apply font-sans;
   }
 }
+
+.human-forest-stars {
+  background-image:
+    radial-gradient(circle, rgba(236, 253, 245, 0.52) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(125, 211, 252, 0.34) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(251, 191, 36, 0.28) 0 1px, transparent 1.5px);
+  background-position:
+    0 0,
+    38px 28px,
+    16px 52px;
+  background-size:
+    86px 86px,
+    124px 124px,
+    152px 152px;
+}
