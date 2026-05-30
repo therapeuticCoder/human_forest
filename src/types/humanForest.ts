@@ -1,7 +1,5 @@
 export type FieldLayer = "you" | "pod" | "tribe" | "guild" | "signal";
 
-export type TimelineFilter = "all" | "pod" | "tribe" | "guild" | "signal";
-
 export type FieldNode = {
   id: string;
   label: string;

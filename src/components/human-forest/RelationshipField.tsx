@@ -1,6 +1,9 @@
+import { Sprout } from "lucide-react";
+
 import { fieldConnections, fieldNodes, guildPlanes } from "@/data/humanForest";
 
 import { FieldNode } from "./FieldNode";
+import { FieldControlBar } from "./FieldControlBar";
 import { GuildPlane } from "./GuildPlane";
 
 const nodesById = new Map(fieldNodes.map((node) => [node.id, node]));
@@ -14,17 +17,17 @@ export function RelationshipField() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(20,184,166,0.24),transparent_28%),radial-gradient(circle_at_20%_18%,rgba(132,204,22,0.16),transparent_20%),radial-gradient(circle_at_84%_76%,rgba(251,191,36,0.12),transparent_18%)]" />
       <div className="human-forest-stars absolute inset-0 opacity-65" />
 
-      <div className="relative z-30 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.26em] text-emerald-100/60">
-            Living field
-          </p>
-          <h1 className="mt-2 max-w-xl text-3xl font-semibold text-white sm:text-5xl">
+      <div className="relative z-30">
+        <div className="flex items-center gap-3">
+          <div className="grid h-10 w-10 place-items-center rounded-lg border border-emerald-200/25 bg-emerald-200/10 text-emerald-100 shadow-[0_0_34px_rgba(16,185,129,0.25)]">
+            <Sprout aria-hidden="true" className="h-5 w-5" />
+          </div>
+          <p className="text-sm font-semibold text-white">Human Forest</p>
+        </div>
+        <div className="mt-5 w-full max-w-xl rounded-lg border border-white/10 bg-slate-950/45 p-5 shadow-[0_0_34px_rgba(94,234,212,0.08)] backdrop-blur-md">
+          <h1 className="text-3xl font-semibold text-white sm:text-5xl">
             Not everything matters the same.
           </h1>
-        </div>
-        <div className="hidden max-w-40 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-right text-xs text-slate-300 md:block">
-          Close signals glow brighter. Distant signals stay visible.
         </div>
       </div>
 
@@ -83,20 +86,7 @@ export function RelationshipField() {
         <FieldNode key={node.id} node={node} />
       ))}
 
-      <div className="absolute bottom-5 left-5 z-30 grid grid-cols-2 gap-2 text-xs text-slate-300 sm:grid-cols-4">
-        <span className="rounded-full border border-lime-200/20 bg-lime-200/8 px-3 py-1">
-          Pod: close
-        </span>
-        <span className="rounded-full border border-sky-200/20 bg-sky-200/8 px-3 py-1">
-          Tribe: wider
-        </span>
-        <span className="rounded-full border border-violet-200/20 bg-violet-200/8 px-3 py-1">
-          Guilds: planes
-        </span>
-        <span className="rounded-full border border-amber-200/20 bg-amber-200/8 px-3 py-1">
-          Signals: edge
-        </span>
-      </div>
+      <FieldControlBar viewControl="timeline" />
     </section>
   );
 }

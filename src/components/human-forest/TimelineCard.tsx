@@ -4,6 +4,7 @@ import type { TimelinePost } from "@/types/humanForest";
 
 type TimelineCardProps = {
   post: TimelinePost;
+  size?: "full" | "compact" | "mini";
 };
 
 const cardClasses: Record<TimelinePost["layer"], string> = {
@@ -22,24 +23,43 @@ const badgeClasses: Record<TimelinePost["layer"], string> = {
   signal: "border-amber-200/25 bg-amber-200/10 text-amber-100",
 };
 
-export function TimelineCard({ post }: TimelineCardProps) {
+export function TimelineCard({ post, size = "full" }: TimelineCardProps) {
   return (
-    <article className={cn("rounded-lg border p-4", cardClasses[post.layer])}>
+    <article
+      className={cn(
+        "rounded-lg border",
+        size === "full" && "p-4",
+        size === "compact" && "p-3",
+        size === "mini" && "p-2.5",
+        cardClasses[post.layer],
+      )}
+    >
       <div className="flex items-center justify-between gap-3">
         <Badge
-          className={cn("capitalize", badgeClasses[post.layer])}
+          className={cn(
+            "capitalize",
+            size === "mini" && "px-1.5 py-0 text-[0.58rem]",
+            badgeClasses[post.layer],
+          )}
           variant="outline"
         >
           {post.layer === "guild" ? "Guilds" : post.layer}
         </Badge>
         <span className="text-xs text-slate-500">{post.time}</span>
       </div>
-      <div className="mt-3">
-        <p className="text-xs text-slate-400">{post.source}</p>
-        <h2 className="mt-1 text-sm font-semibold text-slate-50">
+      <div className={cn(size === "full" ? "mt-3" : "mt-2")}>
+        <p className="truncate text-xs text-slate-400">{post.source}</p>
+        <h2
+          className={cn(
+            "mt-1 font-semibold text-slate-50",
+            size === "mini" ? "text-xs leading-4" : "text-sm",
+          )}
+        >
           {post.title}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-slate-300">{post.body}</p>
+        {size === "full" ? (
+          <p className="mt-2 text-sm leading-6 text-slate-300">{post.body}</p>
+        ) : null}
       </div>
     </article>
   );

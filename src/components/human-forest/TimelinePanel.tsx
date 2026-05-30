@@ -1,24 +1,24 @@
-import { useMemo, useState } from "react";
-
 import { timelinePosts } from "@/data/humanForest";
-import type { TimelineFilter } from "@/types/humanForest";
 
+import { FieldControlBar } from "./FieldControlBar";
 import { TimelineCard } from "./TimelineCard";
-import { TimelineTabs } from "./TimelineTabs";
 
 export function TimelinePanel() {
-  const [activeFilter, setActiveFilter] = useState<TimelineFilter>("all");
-
-  const visiblePosts = useMemo(() => {
-    if (activeFilter === "all") {
-      return timelinePosts;
-    }
-
-    return timelinePosts.filter((post) => post.layer === activeFilter);
-  }, [activeFilter]);
+  const podPosts = timelinePosts
+    .filter((post) => post.layer === "pod")
+    .slice(0, 2);
+  const tribePosts = timelinePosts
+    .filter((post) => post.layer === "tribe")
+    .slice(0, 2);
+  const guildPosts = timelinePosts
+    .filter((post) => post.layer === "guild")
+    .slice(0, 1);
+  const signalPosts = timelinePosts
+    .filter((post) => post.layer === "signal")
+    .slice(0, 3);
 
   return (
-    <aside className="flex min-h-0 flex-col border-t border-white/10 bg-slate-950/55 p-4 lg:h-screen lg:border-l lg:border-t-0">
+    <aside className="relative flex min-h-0 flex-col overflow-hidden border-t border-white/10 bg-slate-950/55 p-4 lg:h-screen lg:border-l lg:border-t-0">
       <div>
         <p className="text-xs uppercase tracking-[0.24em] text-emerald-100/60">
           Timeline
@@ -31,18 +31,25 @@ export function TimelinePanel() {
         </p>
       </div>
 
-      <div className="mt-5">
-        <TimelineTabs
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
-      </div>
-
-      <div className="mt-4 grid gap-3 overflow-y-auto pr-1 lg:min-h-0 lg:flex-1">
-        {visiblePosts.map((post) => (
+      <div className="mt-5 grid gap-3 overflow-y-auto pb-28 pr-1 lg:min-h-0 lg:flex-1">
+        {podPosts.map((post) => (
           <TimelineCard key={post.id} post={post} />
         ))}
+
+        <div className="grid gap-2">
+          {[...tribePosts, ...guildPosts].map((post) => (
+            <TimelineCard key={post.id} post={post} size="compact" />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {signalPosts.map((post) => (
+            <TimelineCard key={post.id} post={post} size="mini" />
+          ))}
+        </div>
       </div>
+
+      <FieldControlBar viewControl="map" />
     </aside>
   );
 }

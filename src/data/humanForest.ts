@@ -5,15 +5,6 @@ import type {
   TimelinePost,
 } from "@/types/humanForest";
 
-export const navItems = [
-  "Field",
-  "Pod",
-  "Tribe",
-  "Guilds",
-  "Signals",
-  "Reflection",
-];
-
 export const fieldNodes: FieldNode[] = [
   { id: "you", label: "You", layer: "you", x: 50, y: 50 },
   { id: "mira", label: "Mira", layer: "pod", x: 43, y: 34 },
@@ -151,6 +142,14 @@ export const timelinePosts: TimelinePost[] = [
     body: "Shared a note that belongs close, not everywhere.",
   },
   {
+    id: "p3",
+    layer: "pod",
+    source: "Sol",
+    time: "1h",
+    title: "Immediate care",
+    body: "Made space for one practical need before the wider field asks for more.",
+  },
+  {
     id: "t2",
     layer: "tribe",
     source: "Orchard thread",
@@ -173,5 +172,13 @@ export const timelinePosts: TimelinePost[] = [
     time: "Yesterday",
     title: "Re-entry",
     body: "One old thread is becoming relevant again, but it does not need urgency.",
+  },
+  {
+    id: "s3",
+    layer: "signal",
+    source: "Focus beacon",
+    time: "2d",
+    title: "Narrow beam",
+    body: "One thing is asking for attention, not the whole forest.",
   },
 ];
