@@ -40,8 +40,8 @@ function formatActivityTime(publishedAt: string) {
 }
 
 export function TimelinePanel() {
-  const podActivities = humanForestActivities
-    .filter((activity) => getActivityLayer(activity) === "pod")
+  const partyActivities = humanForestActivities
+    .filter((activity) => getActivityLayer(activity) === "party")
     .slice(0, 2);
   const tribeActivities = humanForestActivities
     .filter((activity) => getActivityLayer(activity) === "tribe")
@@ -68,7 +68,7 @@ export function TimelinePanel() {
       </div>
 
       <div className="mt-5 grid gap-3 overflow-y-auto pb-4 pr-1 lg:min-h-0 lg:flex-1">
-        {podActivities.map((activity) => (
+        {partyActivities.map((activity) => (
           <TimelineCard
             key={activity.id}
             activity={activity}

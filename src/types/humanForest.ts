@@ -1,4 +1,4 @@
-export type HumanForestLayer = "self" | "pod" | "tribe" | "guild" | "signal";
+export type HumanForestLayer = "self" | "party" | "tribe" | "guild" | "signal";
 
 export type HumanForestSourceType =
   | "person"
@@ -104,7 +104,7 @@ export type HumanForestActivity = {
 };
 
 export type AppConfig = {
-  podMaxNumber: number;
+  partyMaxNumber: number;
   tribeMaxNumber: number;
   guildMaxNumber: number;
   signalMaxNumber: number;

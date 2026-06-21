@@ -13,7 +13,8 @@ type FieldNodeProps = {
 
 const layerClasses: Record<Exclude<HumanForestLayer, "guild">, string> = {
   self: "h-24 w-24 border-emerald-200/80 bg-emerald-100/18 text-emerald-50 shadow-[0_0_70px_rgba(94,234,212,0.58)]",
-  pod: "h-18 w-18 border-amber-100/85 bg-amber-200/22 text-amber-50 shadow-[0_0_64px_rgba(251,191,36,0.54)]",
+  party:
+    "h-18 w-18 border-amber-100/85 bg-amber-200/22 text-amber-50 shadow-[0_0_64px_rgba(251,191,36,0.54)]",
   tribe:
     "h-8 w-8 border-sky-200/30 bg-sky-300/8 text-sky-100/80 opacity-80 shadow-[0_0_18px_rgba(125,211,252,0.14)]",
   signal:
@@ -40,10 +41,11 @@ export function FieldNode({ node }: FieldNodeProps) {
     left: `${node.position.x}%`,
     top: `${node.position.y}%`,
   } satisfies CSSProperties;
+  const layerLabel = node.layer === "party" ? "Party" : node.layer;
 
   return (
     <div
-      aria-label={`${node.displayName}, ${node.layer} node`}
+      aria-label={`${node.displayName}, ${layerLabel} node`}
       className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
       style={style}
     >
@@ -57,7 +59,7 @@ export function FieldNode({ node }: FieldNodeProps) {
           className={cn(
             "max-w-[4.75rem] text-center font-medium leading-none",
             node.layer === "self" && "text-base",
-            node.layer === "pod" && "text-xs",
+            node.layer === "party" && "text-xs",
             node.layer === "tribe" && "text-[0.56rem]",
             node.layer === "signal" && "sr-only",
           )}
@@ -65,7 +67,7 @@ export function FieldNode({ node }: FieldNodeProps) {
           {node.displayName}
         </span>
       </div>
-      {node.layer === "pod" ? (
+      {node.layer === "party" ? (
         <>
           <span className="absolute left-1/2 top-1/2 -z-10 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-200/10 blur-xl" />
           <span className="absolute left-1/2 top-1/2 -z-10 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-100/14" />
