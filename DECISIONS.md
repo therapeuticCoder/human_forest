@@ -14,22 +14,26 @@ Important project context should live in this repository, not only in chat histo
 
 Agents should ask before adding new packages, services, frameworks, or integrations.
 
-## D-004: This template stays generic
+## D-004: This repository is now Human Forest
 
-This repository should not include app-specific code, domain-specific content, or assumptions that only apply to one project type.
+This repository is the Human Forest prototype, and project documentation should describe the Human Forest product direction rather than inherited project language.
 
 ## D-005: Human review is required
 
 Agent changes should be reviewed before they are committed. Git history is the safety rail.
 
-## D-006: This starter is domain-neutral
+## D-006: Human Forest uses relational-depth language
 
-This starter should not include therapy tools, clinic content, adulting tools, fantasy UI, or other domain-specific features.
+The product organizes relationships by relational depth. The innermost layer should be called Party, followed by Tribe, Guilds, and Signals.
 
 ## D-007: Use React, TypeScript, Vite, Tailwind, and shadcn/ui
 
-This starter uses a lightweight front-end stack intended for small, polished, agent-friendly web applications.
+Human Forest uses a lightweight front-end stack intended for small, polished, agent-friendly web applications.
 
 ## D-008: Prefer simple local front-end apps first
 
 Child projects should avoid auth, databases, analytics, and backend services until there is a clear need.
+
+## D-009: Curator, Timeline, and Galaxy are separate views
+
+Curator, Timeline, and Galaxy should not be treated as side-by-side panes. The active prototype should make Timeline and Curator switchable as separate views. Galaxy may remain in the codebase where reasonable, but it is not the current polish priority.
