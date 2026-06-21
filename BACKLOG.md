@@ -47,7 +47,7 @@ Keep this as a focused rename PR. Do not build Curator View in this PR.
 
 ### T-003: Decouple Galaxy and Timeline into switchable views
 
-Status: ready
+Status: done
 Size: medium
 
 Goal:

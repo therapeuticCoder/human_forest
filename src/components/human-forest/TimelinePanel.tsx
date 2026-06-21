@@ -54,7 +54,7 @@ export function TimelinePanel() {
     .slice(0, 3);
 
   return (
-    <aside className="relative flex min-h-0 flex-col overflow-hidden border-t border-white/10 bg-slate-950/55 p-4 lg:h-screen lg:border-l lg:border-t-0">
+    <aside className="relative flex min-h-screen flex-col overflow-hidden bg-slate-950/55 p-4 pt-20">
       <div>
         <p className="text-xs uppercase tracking-[0.24em] text-emerald-100/60">
           Timeline
