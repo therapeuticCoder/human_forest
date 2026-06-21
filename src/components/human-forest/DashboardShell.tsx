@@ -1,15 +1,23 @@
-import { RelationshipField } from "./RelationshipField";
-import { TimelinePanel } from "./TimelinePanel";
+import { useState } from "react";
+
+import { CuratorPlaceholderView } from "./CuratorPlaceholderView";
+import { TimelineView } from "./TimelineView";
+import { type HumanForestView, ViewSwitcher } from "./ViewSwitcher";
 
 export function DashboardShell() {
+  const [activeView, setActiveView] = useState<HumanForestView>("timeline");
+
   return (
-    <main className="min-h-screen bg-[#05070d] text-slate-100 lg:h-screen lg:overflow-hidden">
-      <div className="grid min-h-screen grid-rows-[minmax(38rem,1fr)_auto] lg:h-screen lg:grid-cols-[minmax(0,3fr)_minmax(22rem,2fr)] lg:grid-rows-1">
-        <div className="min-h-[38rem] p-3 sm:p-5 lg:h-screen lg:min-h-0">
-          <RelationshipField />
-        </div>
-        <TimelinePanel />
+    <main className="min-h-screen bg-[#05070d] text-slate-100">
+      <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2">
+        <ViewSwitcher activeView={activeView} onViewChange={setActiveView} />
       </div>
+
+      {activeView === "timeline" ? (
+        <TimelineView />
+      ) : (
+        <CuratorPlaceholderView />
+      )}
     </main>
   );
 }
