@@ -7,7 +7,7 @@ import type {
 } from "@/types/humanForest";
 
 export const appConfig: AppConfig = {
-  podMaxNumber: 5,
+  partyMaxNumber: 5,
   tribeMaxNumber: 20,
   guildMaxNumber: 3,
   signalMaxNumber: 5,
@@ -32,10 +32,10 @@ export const humanForestActors: HumanForestActor[] = [
     handle: "@mira@mock.local",
     sourceType: "person",
     platform: "mock",
-    layer: "pod",
+    layer: "party",
     initials: "M",
     position: { x: 43, y: 34 },
-    relationshipLabel: "Pod",
+    relationshipLabel: "Party",
   },
   {
     id: "sol",
@@ -43,10 +43,10 @@ export const humanForestActors: HumanForestActor[] = [
     handle: "@sol@mock.local",
     sourceType: "person",
     platform: "mock",
-    layer: "pod",
+    layer: "party",
     initials: "S",
     position: { x: 61, y: 38 },
-    relationshipLabel: "Pod",
+    relationshipLabel: "Party",
   },
   {
     id: "anya",
@@ -54,10 +54,10 @@ export const humanForestActors: HumanForestActor[] = [
     handle: "@anya@mock.local",
     sourceType: "person",
     platform: "mock",
-    layer: "pod",
+    layer: "party",
     initials: "SA",
     position: { x: 38, y: 56 },
-    relationshipLabel: "Pod",
+    relationshipLabel: "Party",
   },
   {
     id: "dev",
@@ -65,10 +65,10 @@ export const humanForestActors: HumanForestActor[] = [
     handle: "@dev@mock.local",
     sourceType: "person",
     platform: "mock",
-    layer: "pod",
+    layer: "party",
     initials: "D",
     position: { x: 56, y: 64 },
-    relationshipLabel: "Pod",
+    relationshipLabel: "Party",
   },
   {
     id: "ren",
@@ -76,10 +76,10 @@ export const humanForestActors: HumanForestActor[] = [
     handle: "@ren@mock.local",
     sourceType: "person",
     platform: "mock",
-    layer: "pod",
+    layer: "party",
     initials: "R",
     position: { x: 49, y: 28 },
-    relationshipLabel: "Pod",
+    relationshipLabel: "Party",
   },
   {
     id: "lumen",

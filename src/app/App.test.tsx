@@ -11,6 +11,7 @@ describe("App", () => {
       screen.getAllByText(/not everything matters the same/i),
     ).toHaveLength(2);
     expect(screen.getByText(/human forest/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /party/i })).toHaveLength(1);
     expect(screen.getAllByRole("button", { name: /signals/i })).toHaveLength(1);
     expect(
       screen.getByRole("button", { name: /timeline/i }),

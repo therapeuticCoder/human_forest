@@ -22,7 +22,7 @@ type ControlItem = {
 
 const layerControls: ControlItem[] = [
   {
-    label: "Pod",
+    label: "Party",
     icon: CircleDot,
     className:
       "border-lime-200/25 bg-lime-200/10 text-lime-100 shadow-[0_0_30px_rgba(190,242,100,0.12)]",

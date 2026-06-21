@@ -102,9 +102,9 @@ export function RelationshipField() {
           const isPrimaryConnection =
             connection.connectionType === "close" ||
             connection.strength >= 0.75;
-          const isPodConnection =
-            from.layer === "pod" ||
-            to.layer === "pod" ||
+          const isPartyConnection =
+            from.layer === "party" ||
+            to.layer === "party" ||
             from.layer === "self" ||
             to.layer === "self";
 
@@ -114,7 +114,7 @@ export function RelationshipField() {
               filter="url(#filament-glow)"
               opacity={isPrimaryConnection ? 0.72 : 0.23}
               stroke={
-                isPodConnection && isPrimaryConnection
+                isPartyConnection && isPrimaryConnection
                   ? "rgb(253 230 138)"
                   : isPrimaryConnection
                     ? "rgb(167 243 208)"

@@ -8,7 +8,7 @@ Tasks should be small enough for one focused agent session.
 
 ### T-001: Refresh project docs for Human Forest
 
-Status: ready
+Status: done
 Size: small
 
 Goal:
@@ -27,7 +27,7 @@ This should be its own documentation-only PR before feature work continues.
 
 ### T-002: Rename the relationship layer from pod to party
 
-Status: ready
+Status: done
 Size: small
 
 Goal:
