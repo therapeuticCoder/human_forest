@@ -1,8 +1,20 @@
-# Calm React Starter
+# Human Forest
 
-A clean, domain-neutral React starter for small, agent-friendly web applications.
+Human Forest is a local-first React prototype for exploring relationships by
+relational depth. It is currently a front-end-only product experiment focused on
+three views:
 
-Built with:
+- Curator: a planned layered view for browsing people, communities, and ambient
+  signals by closeness.
+- Timeline: the currently active chronological view of relationship activity.
+- Galaxy: an existing relationship-map experiment that is preserved for now but
+  is not the product priority.
+
+The immediate prototype direction is to make the app switchable between Timeline
+and Curator. Galaxy code may remain where useful, but new polish should focus on
+Curator and Timeline unless the backlog says otherwise.
+
+## Tech stack
 
 - Vite
 - React
@@ -13,56 +25,58 @@ Built with:
 - ESLint
 - Prettier
 
-## Purpose
-
-This starter is designed for projects that should be easy for both humans and coding agents to understand, modify, test, and extend.
-
-It should stay generic. Do not add therapy-specific, business-specific, or app-specific features to this repository.
-
-## Getting started
+## Local development
 
 Install dependencies:
 
 ```bash
 pnpm install
+```
+
+Run the app locally:
+
+```bash
 pnpm dev
+```
+
+Run the full project check:
+
+```bash
 pnpm check
+```
+
+Useful focused commands:
+
+```bash
+pnpm lint
+pnpm format:check
+pnpm test
+pnpm build
 ```
 
 ## Project structure
 
+```text
 src/
-app/
-App.tsx
-components/
-layout/
-ui/
-lib/
-test/
+  app/
+  components/
+    human-forest/
+    layout/
+    ui/
+  data/
+  lib/
+  test/
+```
 
 ## Agentic workflow
 
-This repo includes the standard agent-ready files:
+This repo is designed for supervised agentic development. Use one small backlog
+task per agent session and read these files before making changes:
 
-AGENTS.md
-BACKLOG.md
-DECISIONS.md
-CHANGELOG.md
-docs/project-brief.md
-docs/workflow.md
+- `AGENTS.md`
+- `README.md`
+- `BACKLOG.md`
+- `DECISIONS.md`
 
-Use one small backlog task per agent session.
-
-## Creating a new project from this starter
-
-Copy or clone this starter into a new project folder.
-
-Then update:
-
-README.md
-docs/project-brief.md
-package name in package.json
-project-specific tasks in BACKLOG.md
-project-specific decisions in DECISIONS.md
-
-Keep this starter clean and reusable.
+The human remains the product owner and reviewer. Keep changes small,
+reviewable, and scoped to the active backlog task.
